@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello!</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+        width: 100%;
+        font-family: sans-serif;
+        color: #f46aa3;
+        text-align: center;
+      }
+      body {
+        padding: 2%;
+        margin: 0;
+        background: #e5e5e5;
+      }
+      canvas {
+        height: 96%;
+        width: 96%;
+      }
+    </style>
+  </head>
+  <body>
+    <label>Enter a URL to Glitch-Shatter: </label>
+    <input
+      type="text"
+      class="imgSrc"
+      value="https://unsplash.com/photos/kamB4UHlcAE/download"
+    />
+    <canvas class="glitch_port"></canvas>
+    <script>
+      let cvs = document.querySelector('.glitch_port');
+      cvs.height = window.innerHeight - window.innerHeight * 0.04;
+      cvs.width = window.innerWidth - window.innerWidth * 0.04;
+      let imgSrc = document.querySelector('.imgSrc');
+
+      let ctx = cvs.getContext('2d');
+      let imgObj = new Image();
+
+      let tiles = [];
+
+      let globalX = 10;
+      let globalY = 10;
+
+      let tile = (img, sX, sY, sHeight, sWidth) => {
+        let neg = Math.random() > 0.5 ? -1 : 1;
+        let randomShift = (Math.random() * 4 - 1) * neg * Math.random();
+        let moveScale = 1.5;
+        let colorSwap = Math.random() > 0.5;
+        let showColor = Math.random() > 0.5;
+        var glitchScale = Math.random();
+
+        const buffer = document.createElement('canvas');
+        buffer.width = cvs.width;
+        buffer.height = cvs.height;
+        const bx = buffer.getContext('2d');
+        return {
+          draw() {
+            var x2 = sX + globalX * moveScale * randomShift * moveScale;
+            var y2 = sY + globalY * moveScale * randomShift * moveScale;
+            ctx.drawImage(
+              img,
+              sX,
+              sY,
+              sHeight,
+              sWidth,
+              x2,
+              y2,
+              sHeight,
+              sWidth
+            );
+            ctx.globalAlpha = 0.45;
+            if (showColor) {
+              if (colorSwap) {
+                bx.fillStyle = '#F46AA3';
+              } else {
+                bx.fillStyle = '#75B7E9';
+              }
+              bx.fillRect(
+                sX,
+                sY,
+                sHeight,
+                sWidth,
+                x2,
+                y2,
+                sHeight * glitchScale,
+                sWidth * glitchScale
+              );
+              bx.drawImage(
+                img,
+                sX,
+                sY,
+                sHeight,
+                sWidth,
+                x2,
+                y2,
+                sHeight * glitchScale,
+                sWidth * glitchScale
+              );
+              ctx.drawImage(
+                buffer,
+                sX,
+                sY,
+                sHeight,
+                sWidth,
+                x2,
+                y2,
+                sHeight,
+                sWidth
+              );
+            }
+          },
+        };
+      };
+
+      let redrawTiles = () => {
+        for (let i = 0; i < tiles.length; i++) {
+          tiles[i].draw();
+        }
+      };
+
+      imgObj.onload = () => {
+        ctx.clearRect(0, 0, cvs.width, cvs.height);
+        tiles = [];
+        var resize = document.createElement('canvas');
+        var rctx = resize.getContext('2d');
+        resize.height = cvs.height;
+        resize.width = imgObj.width * (resize.height / imgObj.height);
+        var oc = document.createElement('canvas'),
+          octx = oc.getContext('2d');
+
+        oc.width = cvs.width;
+        oc.height = cvs.height;
+        octx.drawImage(imgObj, 0, 0, oc.width, oc.height);
+        rctx.drawImage(
+          oc,
+          0,
+          0,
+          oc.width,
+          oc.height,
+          0,
+          0,
+          resize.width,
+          resize.height
+        );
+        var numShards = 300;
+        for (var i = 0; i < numShards; i++) {
+          let sX = cvs.width * Math.random() + 1;
+          let sY = cvs.height * Math.random();
+          let sHeight = 200 * Math.random();
+          let sWidth = 200 * Math.random();
+          var t = tile(resize, sX, sY, sHeight, sWidth);
+          tiles.push(t);
+        }
+        redrawTiles();
+      };
+
+      cvs.addEventListener('mousemove', (e) => {
+        ctx.clearRect(0, 0, cvs.width, cvs.height);
+        const midX = cvs.width / 2;
+        const midY = cvs.height / 2;
+        globalX =
+          Math.sqrt((midY - midX) ** 2 + (e.clientY - e.clientX) ** 2) / 20;
+        globalY =
+          Math.sqrt((e.clientY - midX) ** 2 + (midY - e.clientX) ** 2) / 20;
+        redrawTiles();
+      });
+
+      imgObj.src = imgSrc.value;
+
+      imgSrc.addEventListener('change', () => {
+        imgObj.src = imgSrc.value;
+      });
+    </script>
+  </body>
+</html>

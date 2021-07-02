@@ -1,0 +1,90 @@
+---
+layout: layouts/index
+title: Howdy, I'm Wuz!
+---
+
+<main class="content">
+  <header class="pos:rel">
+    <h1
+      class="typescale:12 wght:700 text-gradient:hacker drop-shadow:gray-haze"
+    >
+      Howdy, I'm Wuz.
+    </h1>
+  </header>
+  <h2 class="typescale:7 margin:1:bottom">
+    Software engineer working to help other engineers learn and grow.
+  </h2>
+  <h3 class="typescale:6">Current Focuses</h3>
+  <ul class="">
+    <li>
+      <a href="/resume">Looking for work</a> &mdash; Do you need a senior
+      software engineer?
+    </li>
+  </ul>
+  <hr />
+  <ul class="">
+    <li>
+      <a href="https://indyhackers.org">IndyHackers</a> &mdash; A community for
+      tech folks in Indiana
+    </li>
+    <li>
+      <a href="https://serialfork.com">SerialFork</a> &mdash; A Indy-based
+      Hackerspace
+    </li>
+  </ul>
+  <h3 class="typescale:6">Find me on the web</h3>
+  <ul>
+    <li>
+      <a rel="me" href="https://multiverse.plus/wuz">Multiverse</a>
+    </li>
+    <!-- <li>                                                         -->
+    <!-- 	<a rel="me" href="https://sunbeam.city/@wuz"> Mastodon </a> -->
+    <!-- </li>                                                        -->
+    <li>
+      <a rel="me" href="https://twitter.com/CallMeWuz">Twitter</a>
+    </li>
+    <li>
+      <a rel="me" href="https://sr.ht/~wuz"> SourceHut</a>
+    </li>
+    <li>
+      <a rel="me" href="https://github.com/wuz"> Github</a>
+    </li>
+    <li>
+      <a rel="me" href="https://keybase.io/wuz"> Keybase</a>
+    </li>
+    <li>
+      <a href="https://kit.co/wuz">kit</a>
+    </li>
+  </ul>
+  <h3 class="typescale:6">Projects</h3>
+  <p>
+    things I've built <br />
+    <a href="https://dankneon.com">Dank Neon</a>,
+    <a href="https://botsin.space/@ajjbot">AJJ Bot</a>,
+    <a href="https://botsin.space/@ajjbot">AJJ Bot</a>,
+    <a href="/experiments/picdance">Picdance</a>,
+    <a href="/experiments/glitch">Photo Glitch</a>, and
+    <a href="https://github.com/wuz/all_google_fonts"> all google fonts </a>
+  </p>
+  <h3 class="typescale:6">Recent Writing</h3>
+  <ul class="grid grid:auto-fit">
+    {%- for post in collections.writing reversed -%} {% if post.data.draft %} {%
+    else %} {% if post.data.stage >= 2 %}
+    <li
+      class="
+        border:1:gray-haze
+        padding:2
+        margin:1:top
+        flex flex:column
+        width:50p
+        jc:space-between
+      "
+    >
+      <a href="{{post.url}}">{{ post.data.title }}</a>
+      <time class="typescale:2" datetime="{{page.date}}">
+        {{ post.date | prettyDate }}
+      </time>
+    </li>
+    {% endif %} {% endif %} {%- endfor -%}
+  </ul>
+</main>

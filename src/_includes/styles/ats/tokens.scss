@@ -1,0 +1,97 @@
+// $: (
+// 	'lighter': ,
+// 	'light': ,
+// 	'default': ,
+// 	'dark': ,
+// 	'darker': ,
+// 	'contrast': ,
+// );
+
+$terminal-dreams: (
+	'lighter': #f5f5f5,
+	'default': #040d11,
+);
+
+$gray-haze: (
+	'lighter': #abd1dd,
+	'light': #8cb6c4,
+	'default': #6895a3,
+	'dark': #4a7785,
+	'darker': #1b424c,
+	'contrast': #06232b,
+);
+
+$purple-ping: (
+	'lighter': #dcbeff,
+	'light': #cc9aff,
+	'default': #ba66ff,
+	'dark': #ad0eff,
+	'darker': #610092,
+	'contrast': #360054,
+);
+
+$relay-red: (
+	'lighter': #fcbab5,
+	'light': #fe918a,
+	'default': #f05d59,
+	'dark': #b8504c,
+	'darker': #5c312e,
+	'contrast': #2d1b19,
+);
+
+
+$electric-blue: (
+	'lighter': #6edbdb,
+	'light': #67bdbd,
+	'default': #5b9998,
+	'dark': #4e7878,
+	'darker': #2f403f,
+	'contrast': #1a2121,
+);
+
+$hacker-pink: (
+	'lighter': #fab9c6,
+	'light': #fd8fa7,
+	'default': #ff467e,
+	'dark': #cc3763,
+	'darker': #632b38,
+	'contrast': #30191d,
+);
+
+$floppy-disk-yellow: (
+	'lighter': #dccb71,
+	'light': #beb166,
+	'default': #998f57,
+	'dark': #797249,
+	'darker': #413d2c,
+	'contrast': #212018,
+);
+
+$colors: (
+  'terminal-dreams': $terminal-dreams,
+  'gray-haze': $gray-haze,
+	'relay-red': $relay-red,
+	'electric-blue': $electric-blue,
+	'hacker-pink': $hacker-pink,
+	'floppy-disk-yellow': $floppy-disk-yellow,
+);
+
+:root {
+  @each $colorName, $map in $colors {
+		@each $name, $color in $map {
+			--c-#{$colorName}-#{$name}: #{$color};
+		}
+	}
+
+	@for $spacing from 1 to 8 {
+		--s-#{$spacing}: #{$spacing * 8}px;
+	}
+
+	--c-brand: var(--c-hacker-pink-default);
+	--c-brand-secondary: var(--c-electric-blue-lighter);
+
+	--large-width: 1280px;
+
+	--base-font-size: 18px;
+	--mobile-font-size: 22px;
+}

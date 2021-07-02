@@ -1,0 +1,26 @@
+{% include "./head.njk" %}
+{% include "./nav.njk" %}
+  <section class="window" data-always-open="true">
+    <div class="window-title">
+      <h1 title="{{title | safe}}">{{ title | safe }}</h1>
+      <button class="close"><span>&times;</span></button>
+    </div>
+    <main class="window-content">
+      {% if cover_image != "" %}
+      <div class="cover-image">
+        <img src="{{ cover_image }}" />
+      </div>
+      {% endif %}
+      <h2">
+        {{ description | safe }}
+      </h2>
+      <h3 class="alert">
+        <section class="alert:icon">{{stage | garden_stage_icon }}</section>
+        {{ stage | garden_stage }}
+      </h3>
+      <article class="markdown">
+        {{ content | safe }}
+      </article>
+    </main>
+  </section>
+{% include "./footer.njk" %}

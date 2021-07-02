@@ -1,0 +1,14 @@
+.alert {
+  background: var(--c-hacker-pink-default);
+  color: var(--c-hacker-pink-darkest);
+	padding: var(--s-1);
+	margin: var(--s-2) 0;
+	display: flex;
+	align-items: center;
+	border-radius: 4px;
+}
+
+.alert\:icon {
+	font-size: 40px;
+	margin-right: var(--s-2);
+}

@@ -1,0 +1,31 @@
+.leaf-container {
+  flex: 1;
+  overflow-x: auto !important;
+}
+
+.leaf {
+  max-width: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.leaf-page {
+  white-space: normal;
+  background: var(--background);
+  border-right: 1px solid var(--dim-grey);
+  display: inline-block;
+  width: 100%;
+  max-width: 625px;
+  height: 100% !important;
+  max-height: 90vh;
+  overflow-y: auto;
+  vertical-align: top;
+  box-sizing: border-box;
+  flex: 1 0 auto;
+}
+
+.page:last-child {
+  margin-right: 15px;
+}
+

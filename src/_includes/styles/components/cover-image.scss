@@ -1,0 +1,12 @@
+.cover-image {
+	height: 350px;
+	width: 100%;
+	overflow: hidden;
+	margin-bottom: var(--s-2);
+	border-radius: 4px;
+
+	img {
+		height: 100%;
+		width: 100%;
+	}
+}
